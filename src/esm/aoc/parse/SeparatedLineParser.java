@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class SeparatedLineParser implements LinesParser<List<List<String>>> {
 
     public static final SeparatedLineParser COMMA_SEPARATED = new SeparatedLineParser(",");
+    public static final SeparatedLineParser NO_SEPARATOR = new SeparatedLineParser("");
 
     private final String separator;
 
