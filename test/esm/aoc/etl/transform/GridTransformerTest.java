@@ -1,5 +1,6 @@
-package esm.aoc.parse;
+package esm.aoc.etl.transform;
 
+import esm.aoc.etl.extract.PuzzleInput;
 import esm.aoc.models.grid.Grid;
 import org.junit.jupiter.api.Test;
 
@@ -7,16 +8,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GridParserTest {
+class GridTransformerTest {
 
     @Test
     void parseGridOfCommaSeparatedNumbers() {
-        List<String> input = List.of(
+        PuzzleInput input = new PuzzleInput(List.of(
                 "1,2,3,5",
                 "-1,4,6,7"
-        );
-        GridParser<Integer> parser = new GridParser<>(SeparatedLineParser.COMMA_SEPARATED, Transform.TO_INT);
-        Grid<Integer> grid = parser.getGrid(input);
+        ));
+        GridTransformer<Integer> parser = new GridTransformer<>(StringSeparatedTransformer.COMMA_SEPARATED, StringParser.TO_INT);
+        Grid<Integer> grid = parser.buildModel(input);
 
         assertEquals(1, grid.getItem(0, 0));
         assertEquals(2, grid.getItem(1, 0));
