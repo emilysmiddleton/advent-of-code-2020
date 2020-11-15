@@ -1,6 +1,5 @@
 package esm.aoc.parse;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * For files where the input is a single comma-separated line.
  */
-public class SeparatedLineParser implements LinesParser<List<String>> {
+public class SeparatedLineParser implements LinesParser<List<List<String>>> {
 
     public static final SeparatedLineParser COMMA_SEPARATED = new SeparatedLineParser(",");
 
@@ -19,9 +18,12 @@ public class SeparatedLineParser implements LinesParser<List<String>> {
     }
 
     @Override
-    public List<String> parse(List<String> lines) {
-        String firstLine = lines.get(0);
-        return Arrays.asList(firstLine.split(separator));
+    public List<List<String>> parse(List<String> lines) {
+        return lines.stream().map(this::parseLine).collect(Collectors.toList());
+    }
+
+    private List<String> parseLine(String line) {
+        return Arrays.asList(line.split(separator));
     }
 
 }
