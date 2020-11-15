@@ -13,7 +13,7 @@ Each puzzle follows the same pattern:
 - **Transform** the puzzle input into a data model
 - **Solve** the puzzle
 
-An interface is provided for each step, and [a utility class](esm/aoc/etl/DaySolver.java) pulls
+An interface is provided for each step, and [a utility class](src/esm/aoc/etl/DaySolver.java) pulls
 the three together to read the input from file and return the answer.
 
 ## Days
