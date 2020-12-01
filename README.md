@@ -16,7 +16,10 @@ Each puzzle follows the same pattern:
 An interface is provided for each step, and [a utility class](src/esm/aoc/etl/DaySolver.java) pulls
 the three together to read the input from file and return the answer.
 
-## Days
+## Example
 
 * [Day 0](src/esm/aoc/days/day00/Day0.md) - Day 1 of 2019 as an example of the framework.
 
+## Solutions
+
+* [Day 1](src/esm/aoc/days/day01/Day1.md) - Report Repair
