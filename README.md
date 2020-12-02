@@ -23,3 +23,4 @@ the three together to read the input from file and return the answer.
 ## Solutions
 
 * [Day 1](src/esm/aoc/days/day01/Day1.md) - Report Repair
+* [Day 2](src/esm/aoc/days/day02/Day2.md) - Password Philosophy
