@@ -22,10 +22,10 @@ public class Coordinate2D {
     public Coordinate2D move(Direction2D direction, int spaces) {
         switch (direction) {
             case UP -> {
-                return new Coordinate2D(x, y + spaces);
+                return new Coordinate2D(x, y - spaces);
             }
             case DOWN -> {
-                return new Coordinate2D(x, y - spaces);
+                return new Coordinate2D(x, y + spaces);
             }
             case LEFT -> {
                 return new Coordinate2D(x - spaces, y);
@@ -49,5 +49,10 @@ public class Coordinate2D {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return x + "," + y;
     }
 }

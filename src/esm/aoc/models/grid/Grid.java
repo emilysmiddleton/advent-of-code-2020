@@ -22,4 +22,5 @@ public class Grid<T> {
     public T getItem(int x, int y) {
         return items.get(new Coordinate2D(x, y));
     }
+
 }
