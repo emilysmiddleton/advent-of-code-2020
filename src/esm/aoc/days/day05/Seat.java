@@ -1,5 +1,7 @@
 package esm.aoc.days.day05;
 
+import esm.aoc.models.partition.Partition;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,18 +36,9 @@ public class Seat {
     }
 
     private int binaryPartition(List<Boolean> instructions) {
-        int min = 0;
-        int max = (int) Math.pow(2, instructions.size());
-        int partitionSize = max;
-        for (boolean instruction : instructions) {
-            partitionSize = partitionSize / 2;
-            if (instruction) {
-                max = max - partitionSize;
-            }  else {
-                min = min + partitionSize;
-            }
-        }
-        return min;
+        Partition partition = new Partition(0, (int) Math.pow(2, instructions.size()));
+        instructions.forEach(partition::halve);
+        return partition.getMin();
     }
 
 }

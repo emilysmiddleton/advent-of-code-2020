@@ -26,3 +26,4 @@ the three together to read the input from file and return the answer.
 * [Day 2](src/esm/aoc/days/day02/Day2.md) - Password Philosophy
 * [Day 3](src/esm/aoc/days/day03/Day3.md) - Toboggan Trajectory
 * [Day 4](src/esm/aoc/days/day04/Day4.md) - Passport Processing
+* [Day 5](src/esm/aoc/days/day05/Day5.md) - Binary Boarding
