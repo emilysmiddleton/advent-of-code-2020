@@ -10,14 +10,14 @@ class Coordinate2DTest {
     void moveUp() {
         Coordinate2D start = new Coordinate2D(1, 2);
         Coordinate2D end = start.move(Direction2D.UP, 5);
-        assertEquals(new Coordinate2D(1, 7), end);
+        assertEquals(new Coordinate2D(1, -3), end);
     }
 
     @Test
     void moveDown() {
         Coordinate2D start = new Coordinate2D(1, 2);
         Coordinate2D end = start.move(Direction2D.DOWN, 5);
-        assertEquals(new Coordinate2D(1, -3), end);
+        assertEquals(new Coordinate2D(1, 7), end);
     }
 
     @Test

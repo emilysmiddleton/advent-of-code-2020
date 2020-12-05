@@ -24,3 +24,4 @@ the three together to read the input from file and return the answer.
 
 * [Day 1](src/esm/aoc/days/day01/Day1.md) - Report Repair
 * [Day 2](src/esm/aoc/days/day02/Day2.md) - Password Philosophy
+* [Day 3](src/esm/aoc/days/day03/Day3.md) - Toboggan Trajectory

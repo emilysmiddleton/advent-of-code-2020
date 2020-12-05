@@ -8,7 +8,7 @@ class GridTest {
 
     @Test
     void addCoordinateAndGetWithOriginalCoordinate() {
-        Grid<String> grid = new Grid<>();
+        Grid<String> grid = new MapBackedGrid<>();
         Coordinate2D coordinate = new Coordinate2D(3, 6);
         grid.addItem(coordinate, "Hello");
         assertEquals("Hello", grid.getItem(coordinate));
@@ -16,7 +16,7 @@ class GridTest {
 
     @Test
     void addCoordinateAndGetWithEquivalentCoordinate() {
-        Grid<String> grid = new Grid<>();
+        Grid<String> grid = new MapBackedGrid<>();
         Coordinate2D coordinate = new Coordinate2D(3, 6);
         grid.addItem(coordinate, "Hello");
         assertEquals("Hello", grid.getItem(new Coordinate2D(3, 6)));
@@ -24,7 +24,7 @@ class GridTest {
 
     @Test
     void addCoordinateAndGetWithXY() {
-        Grid<String> grid = new Grid<>();
+        Grid<String> grid = new MapBackedGrid<>();
         Coordinate2D coordinate = new Coordinate2D(3, 6);
         grid.addItem(coordinate, "Hello");
         assertEquals("Hello", grid.getItem(3, 6));
@@ -32,14 +32,14 @@ class GridTest {
 
     @Test
     void addXYAndGetWithCoordinate() {
-        Grid<String> grid = new Grid<>();
+        Grid<String> grid = new MapBackedGrid<>();
         grid.addItem(3, 6, "Hello");
         assertEquals("Hello", grid.getItem(new Coordinate2D(3, 6)));
     }
 
     @Test
     void addXYAndGetWithXY() {
-        Grid<String> grid = new Grid<>();
+        Grid<String> grid = new MapBackedGrid<>();
         grid.addItem(3, 6, "Hello");
         assertEquals("Hello", grid.getItem(3, 6));
     }

@@ -1,26 +1,11 @@
 package esm.aoc.models.grid;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+public interface Grid<T> {
+    void addItem(Coordinate2D coordinate, T item);
 
-public class Grid<T> {
+    void addItem(int x, int y, T item);
 
-    private final Map<Coordinate2D, T> items = new LinkedHashMap<>();
+    T getItem(Coordinate2D coordinate);
 
-    public void addItem(Coordinate2D coordinate, T item) {
-        items.put(coordinate, item);
-    }
-
-    public void addItem(int x, int y, T item) {
-        items.put(new Coordinate2D(x, y), item);
-    }
-
-    public T getItem(Coordinate2D coordinate) {
-        return items.get(coordinate);
-    }
-
-    public T getItem(int x, int y) {
-        return items.get(new Coordinate2D(x, y));
-    }
-
+    T getItem(int x, int y);
 }
