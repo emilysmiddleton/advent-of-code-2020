@@ -19,8 +19,9 @@ public class SolverDay4Part2 {
 
     private static class SolverPart2 implements Solver<List<Passport>, Integer> {
         @Override
-        public Integer solve(List<Passport> grid) {
-            return (int) grid.stream().filter(Passport::hasValidFields).count();
+        public Integer solve(List<Passport> passports) {
+            passports.stream().forEach(p -> System.out.println(p + " " + p.hasValidFields()));
+            return (int) passports.stream().filter(Passport::hasValidFields).count();
         }
     }
 
