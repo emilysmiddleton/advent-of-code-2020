@@ -1,6 +1,5 @@
 package esm.aoc.days.day06;
 
-import esm.aoc.days.day04.Passport;
 import esm.aoc.etl.extract.PuzzleInput;
 import esm.aoc.etl.transform.Transformer;
 
