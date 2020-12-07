@@ -14,20 +14,31 @@ public class Rules {
 
     private Bag addBag(String description) {
         if (!bags.containsKey(description)) {
-            System.out.println(description);
             bags.put(description, new Bag(description));
         }
         return bags.get(description);
     }
 
+    public Bag getBag(String description) {
+        return bags.get(description);
+    }
+
     public void addRule(String rule) {
-        System.out.println(rule);
         Matcher matcher = LINE.matcher(rule);
         if (matcher.matches()) {
             String description = matcher.group(1);
             Bag bag = addBag(description);
             addContains(bag, matcher.group(2));
         }
+    }
+
+    public int getSize(String description) {
+        Bag bag = getBag(description);
+        int sum = 0;
+        for (String child : bag.getChildren()) {
+            sum += bag.getChildNumber(child) * (getSize(child) + 1);
+        }
+        return sum;
     }
 
     private void addContains(Bag bag, String contains) {
@@ -39,8 +50,9 @@ public class Rules {
             if (matcher.matches()) {
                 int count = Integer.parseInt(matcher.group(1));
                 String description = matcher.group(2);
-                addBag(description);
+                Bag childBag = addBag(description);
                 bag.addContains(description, count);
+                childBag.addIsContainedBy(bag.getDescription());
             }
         }
     }
