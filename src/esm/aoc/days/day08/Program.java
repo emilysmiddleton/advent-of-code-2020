@@ -14,6 +14,10 @@ public class Program {
         this.instructions = instructions;
     }
 
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
     public int getAccumulator() {
         return accumulator;
     }
@@ -30,11 +34,11 @@ public class Program {
         this.pointer = pointer;
     }
 
-    public void run() {
-        System.out.println(instructions);
-        while (!history.contains(this.pointer)) {
-            history.add(this.pointer);
+    public boolean run() {
+        while (!history.contains(pointer) && pointer < instructions.size() ) {
+            history.add(pointer);
             instructions.get(pointer).apply(this);
         }
+        return pointer >= instructions.size();
     }
 }
