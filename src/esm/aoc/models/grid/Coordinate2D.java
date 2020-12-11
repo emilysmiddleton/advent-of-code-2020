@@ -33,6 +33,18 @@ public class Coordinate2D {
             case RIGHT -> {
                 return new Coordinate2D(x + spaces, y);
             }
+            case UP_LEFT -> {
+                return new Coordinate2D(x - spaces, y - spaces);
+            }
+            case UP_RIGHT -> {
+                return new Coordinate2D(x + spaces, y - spaces);
+            }
+            case DOWN_LEFT -> {
+                return new Coordinate2D(x - spaces, y + spaces);
+            }
+            case DOWN_RIGHT -> {
+                return new Coordinate2D(x + spaces, y + spaces);
+            }
             default -> throw new IllegalArgumentException("Unrecognised direction " + direction);
         }
     }

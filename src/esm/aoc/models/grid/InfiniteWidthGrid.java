@@ -1,5 +1,7 @@
 package esm.aoc.models.grid;
 
+import java.util.Set;
+
 public class InfiniteWidthGrid<T> implements Grid<T> {
 
     private int repeatWidth;
@@ -29,4 +31,8 @@ public class InfiniteWidthGrid<T> implements Grid<T> {
         return getItem(coordinate.getX(), coordinate.getY());
     }
 
+    @Override
+    public Set<Coordinate2D> getCoordinates() {
+        return grid.getCoordinates();
+    }
 }

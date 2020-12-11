@@ -2,6 +2,8 @@ package esm.aoc.models.grid;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class MapBackedGrid<T> implements Grid<T> {
 
@@ -27,4 +29,28 @@ public class MapBackedGrid<T> implements Grid<T> {
         return getItem(new Coordinate2D(x, y));
     }
 
+    @Override
+    public Set<Coordinate2D> getCoordinates() {
+        return items.keySet();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MapBackedGrid<?> that = (MapBackedGrid<?>) o;
+        return Objects.equals(items, that.items);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(items);
+    }
+
+    @Override
+    public String toString() {
+        return "MapBackedGrid{" +
+                "items=" + items +
+                '}';
+    }
 }
