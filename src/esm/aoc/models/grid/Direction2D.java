@@ -1,12 +1,20 @@
 package esm.aoc.models.grid;
 
 public enum Direction2D {
-    LEFT,
-    RIGHT,
     UP,
-    DOWN,
-    UP_LEFT,
     UP_RIGHT,
+    RIGHT,
+    DOWN_RIGHT,
+    DOWN,
     DOWN_LEFT,
-    DOWN_RIGHT
+    LEFT,
+    UP_LEFT;
+
+    public Direction2D clockwise(int number) {
+        return Direction2D.values()[(ordinal() + number) % 8];
+    }
+    public Direction2D anticlockwise(int number) {
+        return Direction2D.values()[(ordinal() - number + 8) % 8];
+    }
+
 }

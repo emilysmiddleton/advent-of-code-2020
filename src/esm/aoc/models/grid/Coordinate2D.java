@@ -21,31 +21,15 @@ public class Coordinate2D {
 
     public Coordinate2D move(Direction2D direction, int spaces) {
         switch (direction) {
-            case UP -> {
-                return new Coordinate2D(x, y - spaces);
-            }
-            case DOWN -> {
-                return new Coordinate2D(x, y + spaces);
-            }
-            case LEFT -> {
-                return new Coordinate2D(x - spaces, y);
-            }
-            case RIGHT -> {
-                return new Coordinate2D(x + spaces, y);
-            }
-            case UP_LEFT -> {
-                return new Coordinate2D(x - spaces, y - spaces);
-            }
-            case UP_RIGHT -> {
-                return new Coordinate2D(x + spaces, y - spaces);
-            }
-            case DOWN_LEFT -> {
-                return new Coordinate2D(x - spaces, y + spaces);
-            }
-            case DOWN_RIGHT -> {
-                return new Coordinate2D(x + spaces, y + spaces);
-            }
-            default -> throw new IllegalArgumentException("Unrecognised direction " + direction);
+            case UP: return new Coordinate2D(x, y - spaces);
+            case DOWN: return new Coordinate2D(x, y + spaces);
+            case LEFT: return new Coordinate2D(x - spaces, y);
+            case RIGHT: return new Coordinate2D(x + spaces, y);
+            case UP_LEFT: return new Coordinate2D(x - spaces, y - spaces);
+            case UP_RIGHT: return new Coordinate2D(x + spaces, y - spaces);
+            case DOWN_LEFT: return new Coordinate2D(x - spaces, y + spaces);
+            case DOWN_RIGHT: return new Coordinate2D(x + spaces, y + spaces);
+            default: throw new IllegalArgumentException("Unrecognised direction " + direction);
         }
     }
 

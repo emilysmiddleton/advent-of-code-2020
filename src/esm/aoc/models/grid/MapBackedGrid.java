@@ -34,6 +34,14 @@ public class MapBackedGrid<T> implements Grid<T> {
         return items.keySet();
     }
 
+    private int getMaxX() {
+        return getCoordinates().stream().mapToInt(Coordinate2D::getX).max().orElse(0);
+    }
+
+    private int getMaxY() {
+        return getCoordinates().stream().mapToInt(Coordinate2D::getY).max().orElse(0);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,8 +57,14 @@ public class MapBackedGrid<T> implements Grid<T> {
 
     @Override
     public String toString() {
-        return "MapBackedGrid{" +
-                "items=" + items +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        for (int y = 0; y < getMaxY(); y++) {
+            for (int x = 0; x < getMaxX(); x++) {
+                T value = getItem(x, y);
+                builder.append(value == null ? " " : value);
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 }

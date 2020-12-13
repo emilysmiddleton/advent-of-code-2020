@@ -19,11 +19,11 @@ public class ProgramParser implements Transformer<Program> {
         if (matcher.matches()) {
             String code = matcher.group(1);
             int value = Integer.parseInt(matcher.group(2));
-            return switch (code) {
-                case "acc" -> new Accumalate(value);
-                case "jmp" -> new Jump(value);
-                default -> new Nop();
-            };
+            switch (code) {
+                case "acc": return new Accumalate(value);
+                case "jmp": return new Jump(value);
+                default: return new Nop();
+            }
         }
         throw new IllegalArgumentException(line);
     }
