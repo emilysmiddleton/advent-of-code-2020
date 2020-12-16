@@ -1,18 +1,16 @@
 package esm.aoc.days.day14;
 
-import java.util.List;
-
 public class Program {
 
-    private final Bitmask bitmask;
+    private final String bitmask;
     private final Instruction instruction;
 
-    public Program(Bitmask bitmask, Instruction instruction) {
+    public Program(String bitmask, Instruction instruction) {
         this.bitmask = bitmask;
         this.instruction = instruction;
     }
 
-    public Bitmask getBitmask() {
+    public String getBitmask() {
         return bitmask;
     }
 

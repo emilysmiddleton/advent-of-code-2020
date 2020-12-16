@@ -1,7 +1,5 @@
 package esm.aoc.days.day14;
 
-import java.math.BigInteger;
-
 public class Instruction {
 
     private int index;
