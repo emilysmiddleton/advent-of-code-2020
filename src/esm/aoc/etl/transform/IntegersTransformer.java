@@ -14,7 +14,11 @@ public class IntegersTransformer implements Transformer<List<Integer>> {
 
     @Override
     public List<Integer> buildModel(PuzzleInput input) {
-        return input.getLines().stream()
+        return parseInts(input.getLines());
+    }
+
+    public List<Integer> parseInts(List<String> strings) {
+        return strings.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

@@ -33,4 +33,8 @@ public class Partition {
     public int getSize() {
         return max - min;
     }
+
+    public boolean contains(int value) {
+        return value >= min && value <= max;
+    }
 }

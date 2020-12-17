@@ -25,7 +25,7 @@ public class StringSeparatedTransformer implements Transformer<List<List<String>
         return input.getLines().stream().map(this::parseLine).collect(Collectors.toList());
     }
 
-    private List<String> parseLine(String line) {
+    public List<String> parseLine(String line) {
         return Arrays.asList(line.split(separator));
     }
 
