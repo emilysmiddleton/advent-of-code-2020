@@ -18,17 +18,10 @@ public class SolverDay16Part1 implements Solver<TrainModel, Integer> {
     @Override
     public Integer solve(TrainModel model) {
         int invalid = 0;
-        for (Ticket ticket : model.getOtherTickets()) {
-            for (int value : ticket.getFields()) {
-                if (!isValid(model, value)) {
-                    invalid += value;
-                }
-            }
+        for (Ticket ticket : model.getTickets()) {
+            invalid += model.getInvalidFields(ticket).stream().mapToInt(i -> i).sum();
         }
         return invalid;
     }
 
-    private boolean isValid(TrainModel model, int value) {
-        return model.getFields().stream().map(field -> field.isValid(value)).reduce(false, (a, b) -> a || b);
-    }
 }

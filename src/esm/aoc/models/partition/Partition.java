@@ -37,4 +37,9 @@ public class Partition {
     public boolean contains(int value) {
         return value >= min && value <= max;
     }
+
+    @Override
+    public String toString() {
+        return min + " - " + max;
+    }
 }

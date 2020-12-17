@@ -15,13 +15,8 @@ public class Parser implements Transformer<TrainModel> {
     private static final Pattern FIELD_PATTERN = Pattern.compile("(.*): (\\d+)-(\\d+) or (\\d+)-(\\d+)");
     @Override
     public TrainModel buildModel(PuzzleInput input) {
-        int blanks = 0;
         TrainModel model = new TrainModel();
         for (String line : input.getLines()) {
-            if (line.isEmpty()) {
-                blanks++;
-                continue;
-            }
             Matcher matcher = FIELD_PATTERN.matcher(line);
             if (matcher.matches()) {
                 Partition[] partitions = {
@@ -30,10 +25,7 @@ public class Parser implements Transformer<TrainModel> {
                 };
                 model.addField(new FieldRestriction(matcher.group(1), partitions));
             } else {
-                if (blanks == 1 && !"your ticket:".equals(line)) {
-                    model.setMyTicket(createTicket(line));
-                }
-                if (blanks == 2 && !"nearby tickets:".equals(line)) {
+                if (!line.isEmpty() && !"your ticket:".equals(line) && !"nearby tickets:".equals(line)) {
                     model.addTicket(createTicket(line));
                 }
             }

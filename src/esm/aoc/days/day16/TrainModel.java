@@ -2,12 +2,12 @@ package esm.aoc.days.day16;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TrainModel {
 
     final List<FieldRestriction> fields = new ArrayList<>();
-    Ticket myTicket;
-    final List<Ticket> otherTickets = new ArrayList<>();
+    final List<Ticket> tickets = new ArrayList<>();
 
     public void addField(FieldRestriction field) {
         fields.add(field);
@@ -16,19 +16,27 @@ public class TrainModel {
         return fields;
     }
 
-    public Ticket getMyTicket() {
-        return myTicket;
-    }
-
-    public void setMyTicket(Ticket myTicket) {
-        this.myTicket = myTicket;
-    }
-
     public void addTicket(Ticket ticket) {
-        otherTickets.add(ticket);
+        tickets.add(ticket);
     }
 
-    public List<Ticket> getOtherTickets() {
-        return otherTickets;
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public boolean isValid(Ticket ticket) {
+        return getInvalidFields(ticket).isEmpty();
+    }
+
+    public List<Integer> getInvalidFields(Ticket ticket) {
+        return ticket.getFields().stream().filter(value -> !isValidField(value)).collect(Collectors.toList());
+    }
+
+    private boolean isValidField(int value) {
+        return fields.stream().map(field -> field.isValid(value)).reduce(false, (a, b) -> a || b);
+    }
+
+    public List<Integer> getValuesAtPosition(int index) {
+        return tickets.stream().filter(this::isValid).map(t -> t.getFields().get(index)).collect(Collectors.toList());
     }
 }

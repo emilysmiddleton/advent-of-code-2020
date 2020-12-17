@@ -13,4 +13,5 @@ public class Ticket {
     public List<Integer> getFields() {
         return fields;
     }
+
 }
