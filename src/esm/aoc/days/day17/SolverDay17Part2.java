@@ -4,12 +4,12 @@ import esm.aoc.etl.DaySolver;
 import esm.aoc.etl.extract.PuzzleInputExtractor;
 import esm.aoc.etl.solve.Solver;
 
-public class SolverDay17Part1 implements Solver<ConwayCube, Integer> {
+public class SolverDay17Part2 implements Solver<ConwayCube, Integer> {
     public static void main(String[] args) {
         DaySolver<ConwayCube, Integer> daySolver = new DaySolver<>(
                 new PuzzleInputExtractor(17),
-                new GridNDParser(3),
-                new SolverDay17Part1()
+                new GridNDParser(4),
+                new SolverDay17Part2()
         );
         System.out.println(daySolver.solve());
     }
