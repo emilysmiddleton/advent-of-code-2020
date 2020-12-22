@@ -16,5 +16,5 @@ public enum Direction2D {
     public Direction2D anticlockwise(int number) {
         return Direction2D.values()[(ordinal() - number + 8) % 8];
     }
-
+    public Direction2D opposite() { return clockwise(4); }
 }
