@@ -24,6 +24,8 @@ public class RulesParser implements Transformer<Inputs> {
                 }
             }
         }
+        rules.expand();
+        System.out.println(rules.getExpandedRules());
         return new Inputs(inputs, rules);
     }
 }

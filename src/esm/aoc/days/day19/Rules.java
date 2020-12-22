@@ -5,37 +5,59 @@ import java.util.stream.Collectors;
 
 public class Rules {
     private final Map<String, String> rules = new LinkedHashMap<>();
-    private final Map<String, String> expandedRules = new LinkedHashMap<>();
+    private final Map<String, List<String>> expandedRules = new LinkedHashMap<>();
 
     public void addRule(String rule) {
         String[] split = rule.split(": ");
-        rules.put(split[0], split[1].replace("\"", ""));
+        if (split[1].startsWith("\"")) {
+            String normalised = split[1].replace("\"", "");
+            expandedRules.put(split[0], List.of(normalised));
+            rules.put(split[0], normalised);
+        }
+        rules.put(split[0], split[1]);
     }
 
-    public String getRule(String index) {
-        return expand(rules.get(index));
+    public void expand() {
+        while (expandedRules.size() < rules.size()) {
+            rules.entrySet().stream()
+                    .filter(e -> !expandedRules.containsKey(e.getKey()) && expandable(e.getValue()))
+                    .forEach(e -> expand(e.getKey(), e.getValue()));
+        }
     }
-    public String expand(String rule) {
-        if (expandedRules.containsKey(rule)) {
-            return expandedRules.get(rule);
+
+    private void expand(String key, String value) {
+        List<String> result = new ArrayList<>();
+        if (value.contains("|")) {
+            String[] split = value.split(" \\| ");
+            result.addAll(expand(split[0]));
+            result.addAll(expand(split[1]));
+        } else {
+            result.addAll(expand(value));
         }
-        if (rules.containsKey(rule)) {
-            return expand(rules.get(rule));
+        expandedRules.put(key, result);
+    }
+
+    public List<String> expand(String value) {
+        String[] split = value.split(" ");
+        if (split.length == 1) {
+            return expandedRules.get(split[0]);
         }
-        if (rule.contains(" | ")) {
-            String[] or = rule.split(" \\| ");
-            String result = "(" + Arrays.stream(or).map(this::expand).collect(Collectors.joining("|")) + ")";
-            expandedRules.put(rule, result);
-            return result;
+        List<String> combined = new ArrayList<>();
+        for (String left : expandedRules.get(split[0])) {
+            for (String right : expandedRules.get(split[1])) {
+                combined.add(left + right);
+            }
         }
-        if (rule.contains(" ")) {
-            String[] sequence = rule.split(" ");
-            String result = Arrays.stream(sequence).map(this::expand).collect(Collectors.joining(""));
-            expandedRules.put(rule, result);
-            return result;
-        }
-        expandedRules.put(rule, rule);
-        return rule;
+        return combined;
+    }
+
+    private boolean expandable(String value) {
+        String[] keys = value.split("[ |]+");
+        return Arrays.stream(keys).allMatch(expandedRules::containsKey);
+    }
+
+    public Map<String, List<String>> getExpandedRules() {
+        return expandedRules;
     }
 
     @Override
