@@ -23,6 +23,7 @@ public class Pieces {
             set.add(rotation.flipHorizontal());
             set.add(rotation.flipVertical());
         }
+        System.out.println(set);
         map.put(piece.getId(), set);
     }
 

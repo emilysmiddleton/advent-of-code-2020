@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class SolverDay20Part1 implements Solver<Pieces, Integer> {
+public class SolverDay20Part1 implements Solver<Pieces, Long> {
 
     public static void main(String[] args) {
-        DaySolver<Pieces, Integer> daySolver = new DaySolver<>(
+        DaySolver<Pieces, Long> daySolver = new DaySolver<>(
                 new PuzzleInputExtractor(20),
                 new PuzzleParser(),
                 new SolverDay20Part1()
@@ -22,13 +22,14 @@ public class SolverDay20Part1 implements Solver<Pieces, Integer> {
     }
 
     @Override
-    public Integer solve(Pieces model) {
+    public Long solve(Pieces model) {
         Set<PuzzlePiece> pieces = model.getAllPieces();
         List<PartialSolvedPuzzle> candidates = new ArrayList<>();
+        int gridSize = (int) Math.sqrt(pieces.size() / 8);
         for (PuzzlePiece piece : pieces) {
             Grid<PuzzlePiece> grid = new MapBackedGrid<>();
             grid.addItem(0, 0, piece);
-            PartialSolvedPuzzle puzzle = new PartialSolvedPuzzle(model.remove(piece.getId()), grid);
+            PartialSolvedPuzzle puzzle = new PartialSolvedPuzzle(gridSize, model.remove(piece.getId()), grid);
             candidates.add(puzzle);
         }
         PartialSolvedPuzzle answer = null;
@@ -36,7 +37,17 @@ public class SolverDay20Part1 implements Solver<Pieces, Integer> {
             answer = expand(candidates);
         }
         System.out.println(answer);
-        return 0;
+        if (answer != null) {
+            PuzzlePiece topLeft = answer.getPlaced().getItem(0, 0);
+            PuzzlePiece topRight = answer.getPlaced().getItem(gridSize - 1, 0);
+            PuzzlePiece bottomLeft = answer.getPlaced().getItem(0, gridSize - 1);
+            PuzzlePiece bottomRight = answer.getPlaced().getItem(gridSize - 1, gridSize - 1);
+            return Long.parseLong(topLeft.getId()) *
+                   Long.parseLong(topRight.getId()) *
+                   Long.parseLong(bottomLeft.getId()) *
+                   Long.parseLong(bottomRight.getId());
+        }
+        return (long) 0;
     }
 
     public PartialSolvedPuzzle expand(List<PartialSolvedPuzzle> candidates) {

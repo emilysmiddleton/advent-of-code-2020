@@ -11,13 +11,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PartialSolvedPuzzle {
-    private static final int size = 3;
+    private final int size;
     private final Pieces pieces;
     private final Grid<PuzzlePiece> placed = new MapBackedGrid<>();
 
-    public PartialSolvedPuzzle(Pieces pieces, Grid<PuzzlePiece> start) {
+    public PartialSolvedPuzzle(int size, Pieces pieces, Grid<PuzzlePiece> start) {
         start.getCoordinates().forEach(c -> placed.addItem(c, start.getItem(c)));
         this.pieces = pieces;
+        this.size = size;
     }
 
     public Grid<PuzzlePiece> getPlaced() {
@@ -52,7 +53,7 @@ public class PartialSolvedPuzzle {
         for (PuzzlePiece nextPiece: matchingPieces()) {
             Pieces nextPieces = pieces.remove(nextPiece.getId());
             Grid<PuzzlePiece> nextGrid = placePiece(nextPiece);
-            PartialSolvedPuzzle nextPuzzle = new PartialSolvedPuzzle(nextPieces, nextGrid);
+            PartialSolvedPuzzle nextPuzzle = new PartialSolvedPuzzle(size, nextPieces, nextGrid);
             next.add(nextPuzzle);
         }
         return next;

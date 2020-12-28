@@ -92,4 +92,15 @@ public class PuzzlePiece {
     public int hashCode() {
         return Objects.hash(id, top, right, bottom, left);
     }
+
+    @Override
+    public String toString() {
+        return "PuzzlePiece{" +
+                "id='" + id + '\'' +
+                ", top='" + top + '\'' +
+                ", right='" + right + '\'' +
+                ", bottom='" + bottom + '\'' +
+                ", left='" + left + '\'' +
+                '}';
+    }
 }

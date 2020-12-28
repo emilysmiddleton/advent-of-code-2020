@@ -7,6 +7,7 @@ import esm.aoc.models.grid.MapBackedGrid;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +15,7 @@ class PartialSolvedPuzzleTest {
 
     @Test
     void getNextCoordinate() {
-        PartialSolvedPuzzle puzzle = new PartialSolvedPuzzle(new Pieces(new LinkedHashMap<>()), new MapBackedGrid<>());
+        PartialSolvedPuzzle puzzle = new PartialSolvedPuzzle(3, new Pieces(new LinkedHashMap<>()), new MapBackedGrid<>());
         Grid<PuzzlePiece> grid = puzzle.getPlaced();
 
         assertEquals(0, puzzle.getSize());
@@ -59,12 +60,13 @@ class PartialSolvedPuzzleTest {
 
     @Test
     void getNext() {
-        Pieces pieces = new PuzzleParser().buildModel(LINES);
-        PuzzlePiece first = new PuzzlePiece()
-;    }
-
-    @Test
-    void placePiece() {
+        Pieces pieces = new PuzzleParser().buildModel(new PuzzleInput(PuzzleParserTest.LINES));
+        PuzzlePiece first = new PuzzlePiece("1951", "#...##.#..", ".#..#####.", "#.##...##.", "#..#..#.##");
+        Grid<PuzzlePiece> grid = new MapBackedGrid<>();
+        grid.addItem(0, 0, first);
+        PartialSolvedPuzzle psp = new PartialSolvedPuzzle(3, pieces.remove("1951"), grid);
+        List<PartialSolvedPuzzle> next = psp.getNext();
+        assertEquals(1, next.size());
     }
 
 }
