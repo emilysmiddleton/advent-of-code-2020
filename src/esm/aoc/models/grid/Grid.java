@@ -7,6 +7,8 @@ public interface Grid<T> {
 
     void addItem(int x, int y, T item);
 
+    void removeItem(int x, int y);
+
     T getItem(Coordinate2D coordinate);
 
     T getItem(int x, int y);

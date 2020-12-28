@@ -20,6 +20,11 @@ public class MapBackedGrid<T> implements Grid<T> {
     }
 
     @Override
+    public void removeItem(int x, int y) {
+        items.remove(new Coordinate2D(x, y));
+    }
+
+    @Override
     public T getItem(Coordinate2D coordinate) {
         return items.get(coordinate);
     }

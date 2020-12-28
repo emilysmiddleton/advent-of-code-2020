@@ -13,6 +13,11 @@ public class InfiniteWidthGrid<T> implements Grid<T> {
     }
 
     @Override
+    public void removeItem(int x, int y) {
+        grid.removeItem(x, y);
+    }
+
+    @Override
     public void addItem(Coordinate2D coordinate, T item) {
         grid.addItem(coordinate, item);
     }
