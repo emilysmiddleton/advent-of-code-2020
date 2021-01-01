@@ -63,13 +63,40 @@ public class MapBackedGrid<T> implements Grid<T> {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int y = 0; y < getMaxY(); y++) {
-            for (int x = 0; x < getMaxX(); x++) {
+        for (int y = 0; y <= getMaxY(); y++) {
+            for (int x = 0; x <= getMaxX(); x++) {
                 T value = getItem(x, y);
                 builder.append(value == null ? " " : value);
             }
             builder.append("\n");
         }
         return builder.toString();
+    }
+
+    @Override
+    public Grid<T> rotate(int size) {
+        Grid<T> newGrid = new MapBackedGrid<>();
+        for (Coordinate2D coord: getCoordinates()) {
+            newGrid.addItem(coord.getY(), size - 1 - coord.getX(), getItem(coord));
+        }
+        return newGrid;
+    }
+
+    @Override
+    public Grid<T> flipVertical(int size) {
+        Grid<T> newGrid = new MapBackedGrid<>();
+        for (Coordinate2D coord: getCoordinates()) {
+            newGrid.addItem(size - 1 - coord.getX(), coord.getY(), getItem(coord));
+        }
+        return newGrid;
+    }
+
+    @Override
+    public Grid<T> flipHorizontal(int size) {
+        Grid<T> newGrid = new MapBackedGrid<>();
+        for (Coordinate2D coord: getCoordinates()) {
+            newGrid.addItem(coord.getX(), size - 1 - coord.getY(), getItem(coord));
+        }
+        return newGrid;
     }
 }

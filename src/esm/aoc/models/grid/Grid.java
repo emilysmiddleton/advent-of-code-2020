@@ -14,4 +14,10 @@ public interface Grid<T> {
     T getItem(int x, int y);
 
     Set<Coordinate2D> getCoordinates();
+
+    Grid<T> rotate(int size);
+
+    Grid<T> flipVertical(int size);
+
+    Grid<T> flipHorizontal(int size);
 }

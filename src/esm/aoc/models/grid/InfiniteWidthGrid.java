@@ -40,4 +40,19 @@ public class InfiniteWidthGrid<T> implements Grid<T> {
     public Set<Coordinate2D> getCoordinates() {
         return grid.getCoordinates();
     }
+
+    @Override
+    public Grid<T> rotate(int size) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Grid<T> flipHorizontal(int size) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Grid<T> flipVertical(int size) {
+        throw new UnsupportedOperationException();
+    }
 }

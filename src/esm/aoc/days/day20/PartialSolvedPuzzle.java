@@ -11,14 +11,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PartialSolvedPuzzle {
-    private final int size;
     private final Pieces pieces;
     private final Grid<PuzzlePiece> placed = new MapBackedGrid<>();
 
-    public PartialSolvedPuzzle(int size, Pieces pieces, Grid<PuzzlePiece> start) {
+    public PartialSolvedPuzzle(Pieces pieces, Grid<PuzzlePiece> start) {
         start.getCoordinates().forEach(c -> placed.addItem(c, start.getItem(c)));
         this.pieces = pieces;
-        this.size = size;
     }
 
     public Grid<PuzzlePiece> getPlaced() {
@@ -26,8 +24,8 @@ public class PartialSolvedPuzzle {
     }
 
     public Coordinate2D getNextCoordinate() {
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
+        for (int y = 0; y < pieces.getPuzzleSize(); y++) {
+            for (int x = 0; x < pieces.getPuzzleSize(); x++) {
                 if (placed.getItem(x, y) == null) {
                     return new Coordinate2D(x, y);
                 }
@@ -49,11 +47,10 @@ public class PartialSolvedPuzzle {
 
     public List<PartialSolvedPuzzle> getNext() {
         List<PartialSolvedPuzzle> next = new ArrayList<>();
-        System.out.println(matchingPieces().stream().map(PuzzlePiece::getId).collect(Collectors.joining(" ")));
         for (PuzzlePiece nextPiece: matchingPieces()) {
             Pieces nextPieces = pieces.remove(nextPiece.getId());
             Grid<PuzzlePiece> nextGrid = placePiece(nextPiece);
-            PartialSolvedPuzzle nextPuzzle = new PartialSolvedPuzzle(size, nextPieces, nextGrid);
+            PartialSolvedPuzzle nextPuzzle = new PartialSolvedPuzzle(nextPieces, nextGrid);
             next.add(nextPuzzle);
         }
         return next;
@@ -71,10 +68,10 @@ public class PartialSolvedPuzzle {
 
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
+        for (int y = 0; y < pieces.getPuzzleSize(); y++) {
+            for (int x = 0; x < pieces.getPuzzleSize(); x++) {
                 PuzzlePiece piece = placed.getItem(x, y);
-                builder.append(piece == null ? "xxxx " : piece.getId() + " ");
+                builder.append(piece == null ? "xxxxxx " : piece.getConfig() + " ");
             }
             builder.append("\n");
         }
